@@ -1,0 +1,20 @@
+---
+
+- name: Install zsh
+  apt: name=zsh state=latest
+
+- name: Clone oh-my-zsh repo
+  git:
+    repo: "https://github.com/robbyrussell/oh-my-zsh.git"
+    dest: "/home/{{ user_name }}/.oh-my-zsh"
+
+- name: deploy .zshrc
+  template:
+    src: "zshrc.j2"
+    dest: "/home/{{ user_name }}/.zshrc"
+    owner: "{{ user_name }}"
+
+- name: Set zsh as default shell
+  user:
+    name: "{{ user_name }}"
+    shell: "/bin/zsh"

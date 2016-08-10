@@ -1,0 +1,15 @@
+---
+- hosts: all
+  remote_user: root
+  become: yes
+  become_method: sudo
+  vars:
+    zsh_theme: norm
+    user_password: "TmpPass"
+    user_name: "YourUser"
+  roles:
+    - role: usercreate
+    - role: update
+    - role: git
+    - role: vim
+    - role: zsh

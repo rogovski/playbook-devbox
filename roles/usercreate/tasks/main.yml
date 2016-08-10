@@ -1,0 +1,11 @@
+---
+
+- name: Creating Admin User {{ user_name }}
+  user:
+    name: "{{ user_name }}" 
+    password: "{{ user_password | password_hash('sha512') }}"
+    groups: sudo
+    append: yes
+
+- name: Expire Password For {{ user_name }}
+  shell: chage -d 0 "{{ user_name }}"
